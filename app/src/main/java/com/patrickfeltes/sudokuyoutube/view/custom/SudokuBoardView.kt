@@ -1,4 +1,4 @@
-package com.patrickfeltes.sudokuyoutube
+package com.patrickfeltes.sudokuyoutube.view.custom
 
 import android.content.Context
 import android.graphics.Canvas
@@ -17,6 +17,8 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet) : View(conte
 
     private var selectedRow = 0
     private var selectedCol = 0
+
+    private var listener: SudokuBoardView.OnTouchListener? = null
 
     private val thickLinePaint = Paint().apply {
         style = Paint.Style.STROKE
@@ -110,9 +112,22 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet) : View(conte
     }
 
     private fun handleTouchEvent(x: Float, y: Float) {
-        selectedRow = (y / cellSizePixels).toInt()
-        selectedCol = (x / cellSizePixels).toInt()
+        val possibleSelectedRow = (y / cellSizePixels).toInt()
+        val possibleSelectedCol = (x / cellSizePixels).toInt()
+        listener?.onCellTouched(possibleSelectedRow, possibleSelectedCol)
+    }
+
+    fun updateSelectedCellUI(row: Int, col: Int) {
+        selectedRow = row
+        selectedCol = col
         invalidate()
     }
 
+    fun registerListener(listener: SudokuBoardView.OnTouchListener) {
+        this.listener = listener
+    }
+
+    interface OnTouchListener {
+        fun onCellTouched(row: Int, col: Int)
+    }
 }
