@@ -3,6 +3,7 @@ package com.patrickfeltes.sudokuyoutube.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -38,6 +39,7 @@ class PlaySudokuActivity : AppCompatActivity(), SudokuBoardView.OnTouchListener 
         }
 
         notesButton.setOnClickListener { viewModel.sudokuGame.changeNoteTakingState() }
+        deleteButton.setOnClickListener { viewModel.sudokuGame.delete() }
     }
 
     private fun updateCells(cells: List<Cell>?) = cells?.let {
@@ -49,17 +51,14 @@ class PlaySudokuActivity : AppCompatActivity(), SudokuBoardView.OnTouchListener 
     }
 
     private fun updateNoteTakingUI(isNoteTaking: Boolean?) = isNoteTaking?.let {
-        if (it) {
-            notesButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        } else {
-            notesButton.setBackgroundColor(Color.LTGRAY)
-        }
+        val color = if (it) ContextCompat.getColor(this, R.color.colorPrimary) else Color.LTGRAY
+        notesButton.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
     }
 
     private fun updateHighlightedKeys(set: Set<Int>?) = set?.let {
         numberButtons.forEachIndexed { index, button ->
             val color = if (set.contains(index + 1)) ContextCompat.getColor(this, R.color.colorPrimary) else Color.LTGRAY
-            button.setBackgroundColor(color)
+            button.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
         }
     }
 
