@@ -11,3 +11,4 @@ The master branch contains the most updated code from the tutorial. Here is a li
 4. [Board Backend and User Input](https://youtu.be/LGemCgr-38o)
 5. [Starting Cells](https://youtu.be/LlyM2ImoAaU)
 6. [Notes](https://youtu.be/ltEwtbva_yA)
+7. [Delete](https://youtu.be/-bf6YwCY_J0)
