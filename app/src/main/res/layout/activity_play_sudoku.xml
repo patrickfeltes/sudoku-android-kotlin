@@ -102,6 +102,14 @@
             android:layout_row="3"
             android:layout_column="0"
             app:srcCompat="@drawable/edit_pen_black" />
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="2"
+            app:srcCompat="@drawable/delete_black" />
     </GridLayout>
 
 </RelativeLayout>
